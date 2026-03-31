@@ -1,0 +1,107 @@
+*{
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+h1{
+    height: 6rem;
+    line-height: 6rem;
+}
+
+.choice{
+    height: 151px;
+    width: 151px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: white;
+    color:#fff;
+    box-shadow: 0 4px 14px 0 rgba(255, 255, 255, 0.922);
+}
+
+.choice:hover{
+    cursor: pointer;
+    background-color: yellow;
+    color:#ff0;
+    box-shadow: 0 4px 14px 0 rgba(255, 255, 0, 0.922);
+}
+
+.choices{
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin: 5rem;
+}
+
+img {
+    height: 150px;
+    width: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+} 
+
+.score{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    gap: 5rem;
+    margin-top: 3rem;
+}
+
+#user-score, #bot-score{
+    font-size: 4rem;
+}
+
+.msg-cont{
+    margin-top: 3rem;
+}
+
+#msg{
+    color:#fff;
+    text-shadow: 0 0 5px #fff;
+    font-size: 2rem;
+    display: inline;
+    padding: 1rem;
+    border-radius: 1rem;
+}
+
+.me{
+    color:#fff;
+    text-shadow: 0 0 5px #fff;
+    font-size: 1.9rem;
+    display: inline;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+}
+/* Dark Mode Only */
+
+body{
+    background-color: #050505;
+    color: #fff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    
+    h1{
+    font-weight: 700;
+    letter-spacing: -1px;
+    color: rgb(255, 255, 255);
+    margin-bottom: 1.5rem;
+    text-shadow: 0 0 5px #fff;
+    background-color: #050505;
+    }
+}
+
+/* copyright */
+
+nav1{
+    position: absolute;
+    bottom: 20px;
+    right: 50px;
+}
+body #cprt{
+    color: #fff;
+    text-shadow: 0 0 5px #fff;
+    font-weight: bold;
+}
