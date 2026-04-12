@@ -5,6 +5,8 @@ let msgContainer = document.querySelector(".msg");
 let msg = document.querySelector("#msg1");
 let themeBtn = document.querySelector("#theme");
 let currMode = "light";
+let playerScore = 0;
+let botScore = 0;
 document.body.classList.add("light");
 
 themeBtn.onclick = () => {
@@ -37,22 +39,41 @@ const winIf = [
 let count = 0;
 boxes.forEach((box) => {
     box.addEventListener("click", () => {
-        if(turnofO){
+        if(turnofO && box.innerText === ""){
             //player1
             box.innerText = "O";
             box.classList.add("o-st");
+            box.disabled = true;
             turnofO = false;
-        } else {
-            //player2
-            box.innerText = "X";
-            box.classList.add("x-st");
-            turnofO = true;
-        }
-        box.disabled = true;
-        count++;
-        checkWin();
+            count++;
+
+            let isWin = checkWin();
+            
+            if(!isWin && count<9){
+                setTimeout(botMove, 300);
+            }
+        } 
     });
 });
+
+const botMove = () => {
+    let availableBoxes = Array.from(boxes).filter(box => box.innerText === "");
+    if(availableBoxes.length>0){
+        let randomIndex = Math.floor(Math.random()*availableBoxes.length);
+        let selectedBox = availableBoxes[randomIndex];
+
+        selectedBox.innerText = "X";
+        selectedBox.classList.add("x-st");
+        selectedBox.disabled = true;
+        count++;
+
+        let botWon = checkWin();
+
+        if(!botWon){
+            turnofO = true;
+        }
+    }
+};
 
 const checkWin = () => {
     let winnerFound = false;
@@ -63,6 +84,7 @@ const checkWin = () => {
         if(pos1val != "" && pos2val != "" && pos3val != ""){
             if(pos1val == pos2val && pos2val == pos3val){
                 showWinner(pos1val);
+                updateScore(pos1val);
                 winnerFound = true;
                 return;
             }
@@ -70,8 +92,26 @@ const checkWin = () => {
     }
     if(!winnerFound && count === 9){
         showDraw();
+        gameActive = false;
+        return false;
     }
-}
+    return false;
+};
+
+let gameActive = true;
+
+const updateScore = (winner) => {
+    if(!gameActive) return;
+
+    if (winner === "O"){
+        playerScore++;
+        document.querySelector("#p-score").innerText = playerScore;
+    } else {
+        botScore++;
+        document.querySelector("#b-score").innerText = botScore;
+    }
+    gameActive = false;
+};
 
 const showWinner = (winner) => {
     msg.innerText = `Congratulations, winner is ${winner}`;
@@ -99,12 +139,22 @@ const enableBoxes = () => {
     }
 }
 
-const resetGame = () => {
-    pos1val = true;
+const resetGame = (fullReset = false) => {
+    gameActive = true;
+    turnofO = true;
     enableBoxes();
     msgContainer.classList.add("hide");
     count = 0;
-}
 
-newGameBtn.addEventListener("click", resetGame);
-resetBtn.addEventListener("click", resetGame);
+    if(fullReset){
+        playerScore = 0;
+        botScore = 0;
+
+        document.querySelector("#p-score").innerText = "0";
+        document.querySelector("#b-score").innerText = "0";
+    }
+};
+
+newGameBtn.addEventListener("click", () => resetGame(false));
+resetBtn.addEventListener("click", () => resetGame(true));
+msgContainer.classList.add("hide");
