@@ -10,8 +10,10 @@ h1{
 }
 
 .choice{
-    height: 151px;
-    width: 151px;
+    height: 25vw;
+    width: 25vw;
+    max-height: 150px;
+    max-width: 150px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -19,6 +21,7 @@ h1{
     background-color: white;
     color:#fff;
     box-shadow: 0 4px 14px 0 rgba(255, 255, 255, 0.922);
+    transition: transform 0.2s ease;
 }
 
 .choice:hover{
@@ -31,13 +34,15 @@ h1{
 .choices{
     display: flex;
     justify-content: center;
-    gap: 3rem;
-    margin: 5rem;
+    align-items: center;
+    gap: 2rem;
+    margin: 3rem 0;
+    flex-wrap: wrap;
 }
 
 img {
-    height: 150px;
-    width: 150px;
+    height: 95%;
+    width: 95%;
     object-fit: cover;
     border-radius: 50%;
 } 
@@ -104,4 +109,24 @@ body #cprt{
     color: #fff;
     text-shadow: 0 0 5px #fff;
     font-weight: bold;
+}
+
+@media (max-width: 600px) {
+    #msg {
+        font-size: 1.1rem;
+    }
+    .choices{
+        gap: 1rem;
+    }
+    #user-score, #bot-score{
+        font-size: 3rem;
+    }
+    .score{
+        gap: 2rem;
+    }
+    nav1{
+        right: 20px;
+        bottom: 10px;
+        font-size: 0.8rem;
+    }
 }
